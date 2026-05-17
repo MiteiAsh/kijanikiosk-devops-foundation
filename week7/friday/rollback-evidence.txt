@@ -1,0 +1,33 @@
+[MONITOR] Monitoring started at Sun May 17 21:57:55 UTC 2026
+
+T0 = 21:58:12 UTC — fault introduced by stopping green environment
+
+[MONITOR] HTTP status: 502 at Sun May 17 21:58:15 UTC 2026
+[MONITOR FAIL] Failure count: 1
+
+[MONITOR] HTTP status: 502 at Sun May 17 21:58:20 UTC 2026
+[MONITOR FAIL] Failure count: 2
+
+[MONITOR] HTTP status: 502 at Sun May 17 21:58:25 UTC 2026
+[MONITOR FAIL] Failure count: 3
+
+T1 = 21:58:25 UTC — [MONITOR FAIL] ROLLBACK TRIGGERED
+
+[ROLLBACK] Rolling back to blue
+Switch complete.
+
+T2 = 21:58:39 UTC — rollback confirmed
+
+curl http://127.0.0.1/health
+{"status":"healthy","version":"v1.3.0","environment":"blue"}
+
+cat /opt/kijanikiosk/.active-env
+blue
+
+cat /opt/kijanikiosk/.previous-env
+green
+
+Total rollback duration:
+27 seconds
+
+No manual intervention occurred between fault introduction and rollback completion.
