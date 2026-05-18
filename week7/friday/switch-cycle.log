@@ -1,0 +1,35 @@
+[21:40:02 UTC] Starting environment verification
+
+systemctl is-active kk-api-blue.service
+active
+
+systemctl is-active kk-api-green.service
+active
+
+curl http://127.0.0.1:3000/health
+{"status":"healthy","version":"v1.3.0","environment":"blue"}
+
+curl http://127.0.0.1:3001/health
+{"status":"healthy","version":"v1.4.0","environment":"green"}
+
+[21:42:11 UTC] Monitor started in separate terminal
+
+sudo bash /opt/kijanikiosk/scripts/switch-env.sh green
+
+Switching traffic to green...
+nginx configuration test successful
+green
+blue
+Switch complete.
+
+curl http://127.0.0.1/health
+{"status":"healthy","version":"v1.4.0","environment":"green"}
+
+cat /opt/kijanikiosk/.active-env
+green
+
+cat /opt/kijanikiosk/.previous-env
+blue
+
+cat /etc/nginx/kijanikiosk-active-env.conf
+set $upstream http://127.0.0.1:3001;
