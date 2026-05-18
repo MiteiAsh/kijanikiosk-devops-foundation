@@ -1,0 +1,13 @@
+T0: Pod deletion initiated at approximately 4m57s pod age
+
+Deleted Pod:
+kk-payments-5f779d875-mnsl7
+
+Replacement Pod:
+kk-payments-5f779d875-x4npk
+
+T1: Replacement Pod reached Running state approximately 1-2 seconds after creation
+
+Observed recovery time: approximately 2 seconds
+
+Kubernetes successfully recreated the deleted Pod automatically after failure simulation.

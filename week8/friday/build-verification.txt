@@ -1,0 +1,13 @@
+docker build --no-cache -t kk-payments:v1.0.0 -f Dockerfile.production .
+
+docker images | grep kk-payments
+Result: image size under 100MB effective size
+
+docker run --rm kk-payments:v1.0.0 whoami
+Result: kijani
+
+docker run --rm kk-payments:v1.0.0 which tsc
+Result: no output
+
+docker ps
+Result: container healthy
