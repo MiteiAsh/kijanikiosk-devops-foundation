@@ -1,0 +1,25 @@
+---
+- name: Configure Kijani Staging Namespace
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: Label staging namespace
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: kijani-staging
+            labels:
+              environment: staging
+
+    - name: Verify namespace exists
+      command: kubectl get namespace kijani-staging
+      register: ns_result
+
+    - debug:
+        var: ns_result.stdout
